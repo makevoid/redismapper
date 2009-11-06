@@ -8,8 +8,6 @@ class RedisMapper
     @@r = db
   end
   
-  
-  
   def initialize(hash)
     hash.map do |key, value|
       instance_variable_set("@#{key}", value)
@@ -114,10 +112,22 @@ class RedisMapper
       value = hash[prop]
       # puts "[#{@model}_id:#{obj_id}:#{prop}] = #{hash[prop]}"
       @@r["#{@model}_id:#{obj_id}:#{prop}"] = value   unless value.nil?
-      @@r["#{@model}_#{prop}:#{value}:id"]  = obj_id  if opts[:index] # CHANGES: sanitize on hash[prop]
+      @@r["#{@model}_#{prop}:#{sanitize(value)}:id"]  = obj_id  if opts[:index] # CHANGES: sanitize on hash[prop]
     end
     new(hash.merge(:id => obj_id))
   end
+  
+  TOKEN = "§"
+  
+  def self.sanitize(value)
+    raise "You can't use § character in this version because is using for escaping." if value.include? TOKEN
+    value.gsub(/\s/, TOKEN)
+  end
+    
+  def self.desanitize(value)
+    value.gsub(/#{TOKEN}/, ' ')
+  end
+  
   
   # classes
   class Resource
@@ -134,7 +144,6 @@ class RedisMapper
   
 
   # UTILS
-  protected 
   def self.delete_db
     @@r.keys('*').map{ |k| @@r.del k }
   end

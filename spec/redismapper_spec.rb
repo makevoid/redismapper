@@ -86,6 +86,15 @@ describe RedisMapper do
     r.to_hash.should == attrs
   end
   
+  it "should be possible that indexed properties have spaces in it" do
+    class Game < RedisMapper
+      property :name, :index => true
+    end
+    g = Game.create(:name => "web game")
+    g.name == "web game"
+  end
+  
+  
   # GET one [exception]
   it "should return nil if a record is not found" do
     class Tao < RedisMapper

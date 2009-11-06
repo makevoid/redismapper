@@ -7,7 +7,7 @@ Echoe.new('redismapper', '0.0.1') do |p|
   p.url            = "http://github.com/makevoid/redismapper"
   p.author         = "Francesco Canessa"
   p.email          = "makevoid@gmail.com"
-  p.ignore_pattern = ["tmp/*", "dump.rdb"]
+  p.ignore_pattern = ["tmp/*", "doc/*", "dump.rdb"]
   p.development_dependencies = ["rspec"]
 end
 
