@@ -16,7 +16,7 @@ class RedisMapper
       self.class.send(:define_method, key){ instance_variable_get("@#{key}") }
     end
   end
-  
+
   def self.inherited(sub)
     sub.instance_variable_set("@model", sub.name.downcase)
   end
@@ -43,7 +43,7 @@ class RedisMapper
   def self.count
     @@r["globals:next_#{@model}_id"].to_i
   end
-    
+  
   # actions
 
   # GET /resources 
@@ -122,6 +122,14 @@ class RedisMapper
   # classes
   class Resource
     # what about moving resource inside is class and make it a loadable module?? (yea like DM's)
+  end
+  
+  def to_hash
+    h = {}
+    eval(self.class.name).properties.map do |prop, opts|
+      h[prop] = instance_variable_get("@#{prop}")
+    end
+    h
   end
   
 

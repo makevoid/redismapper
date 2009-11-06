@@ -53,9 +53,10 @@ describe RedisMapper do
     
     f = Father.create(:name => "foo")
     c = Child.create(:name => "bar", :father_id => f.id)  
+    puts "TODO: relation!!"
   end
   
-  
+  # GET all
   it "should get all resources selecting by an attribute" do
     class Resource < RedisMapper
       property :name
@@ -72,5 +73,27 @@ describe RedisMapper do
     Resource.all(:select => :name).map{ |r| r.description }.compact.should == []
   end
 
+  # GET one
+  it "should list all attributes and values of a resource in a hash" do
+    class Arab < RedisMapper
+      property :name
+      property :description
+    end
+    
+    RedisMapper.delete_db
+    attrs = {:name => "ahmed", :description => "test"}
+    r = Arab.create(attrs)
+    r.to_hash.should == attrs
+  end
+  
+  # GET one [exception]
+  it "should return nil if a record is not found" do
+    class Tao < RedisMapper
+      property :balance
+    end
+  
+    Tao.find(1).should be_nil
+  end
+  
   
 end
