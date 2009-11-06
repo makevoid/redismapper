@@ -28,9 +28,14 @@ puts "users (#{User.count}):"
 p User.all
 puts
 
-puts "Finding a user and his messages"
-u = User.first(:name => "me")
-p Message.all(:user_id => u.id)
-# to be implemented
-# Message.all(:)
+puts "find an user:"
+p User.first(:name => "me")
+
+# TODO: implement has_many association
+# u = User.first(:name => "me")
+# m = Message.all(:user_id => u.id)
+# puts "my messages (#{m.size}):"
+# p m
+
+
 

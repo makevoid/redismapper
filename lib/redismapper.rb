@@ -120,8 +120,10 @@ class RedisMapper
   TOKEN = "§"
   
   def self.sanitize(value)
-    raise "You can't use § character in this version because is using for escaping." if value.include? TOKEN
-    value.gsub(/\s/, TOKEN)
+    if value.is_a? String
+      raise "You can't use § character in this version because is using for escaping." if value.include? TOKEN
+      value.gsub(/\s/, TOKEN)
+    end
   end
     
   def self.desanitize(value)
