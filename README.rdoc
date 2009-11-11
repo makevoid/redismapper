@@ -1,4 +1,5 @@
 = RedisMapper
+
 - a basic ORM for Redis key/value store
 
 by: Francesco 'makevoid' Canessa @ TheFool ( http://thefool.it ) 
@@ -9,12 +10,15 @@ NOTE: I'm sorry but this is in early development, it will be changed and documen
 
 - gem install it (gemcutter way)
 
+
   gem install gemcutter
   gem tumble
   gem install redismapper
 
 
+
 - an example
+
 
 create some models
 
