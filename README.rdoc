@@ -7,6 +7,13 @@ by: Francesco 'makevoid' Canessa @ TheFool ( http://thefool.it )
 NOTE: I'm sorry but this is in early development, it will be changed and documented soon, but feel free to hack it because is very simple. If some specs are failing tell me and we'll add a troubleshooting guide to this readme, thank you.
 
 
+- gem install it (gemcutter way)
+
+  gem install gemcutter
+  gem tumble
+  gem install redismapper
+
+
 - an example
 
 create some models
