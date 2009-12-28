@@ -2,10 +2,10 @@
 
 == a basic ORM for Redis key/value store
 
-by: Francesco 'makevoid' Canessa @ TheFool ( http://thefool.it ) 
+by: Francesco 'makevoid' Canessa
 
 
-NOTE: I'm sorry but this is in early development, it will be changed and documented soon, but feel free to hack it because is very simple. If some specs are failing tell me and we'll add a troubleshooting guide to this readme, thank you.
+
 
 == install dependencies
 
