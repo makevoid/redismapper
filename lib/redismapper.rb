@@ -2,7 +2,7 @@ class RedisMapper
   require 'rubygems'
   require 'redis'
   
-  WARNINGS = true # set false to speed up
+  WARNINGS = true # set false to speed things up
   
   def self.setup(db)
     @@r = db
@@ -45,6 +45,7 @@ class RedisMapper
   # actions
 
   # GET /resources 
+  
   def self.all(props={})
     resources = []
     max = set_all_max(props)
@@ -73,6 +74,8 @@ class RedisMapper
   end
 
 
+  # find / base get
+
   def self.find(obj_id)
     get_resource obj_id
   end
@@ -99,51 +102,66 @@ class RedisMapper
     @properties.map do |prop|
       gets << "#{@model}_id:*:#{prop}"
     end
-    @@r.sort("globals:next_#{@model}_id", :get => gets, 
-                                          :limit => [0, 100],
-                                          :order => 'asc')
+    @@r.sort("globals:next_#{@model}_id", get:     gets, 
+                                          limit:   [0, 100],
+                                          order:   'asc')
   end
 
   # POST /resources    
   def self.create(hash)
     obj_id = @@r.incr "globals:next_#{@model}_id"
-    @@r["#{@model}_id:#{obj_id}:id"]        = obj_id
+    @@r["#{@model}_id:#{obj_id}:id"] = obj_id
+    
     @properties.map do |prop, opts|
       value = hash[prop]
-      # puts "[#{@model}_id:#{obj_id}:#{prop}] = #{hash[prop]}"
       @@r["#{@model}_id:#{obj_id}:#{prop}"] = value   unless value.nil?
       @@r["#{@model}_#{prop}:#{sanitize(value)}:id"]  = obj_id  if opts[:index] # CHANGES: sanitize on hash[prop]
     end
-    new(hash.merge(:id => obj_id))
+    
+    new(
+      hash.merge(id: obj_id)
+    )
   end
   
   TOKEN = "§"
   
   def self.sanitize(value)
     if value.is_a? String
-      raise "You can't use § character in this version because is using for escaping." if value.include? TOKEN
+      # logic 
+      words = %i(§)
+      
+      # template
+      words = words.join ", " 
+      message = "You can't use the "%i(words)" character in this version because is using for escaping." if value.include? TOKEN
       value.gsub(/\s/, TOKEN)
+      
+      # action
+      raise message
     end
   end
     
   def self.desanitize(value)
-    value.gsub(/#{TOKEN}/, ' ')
+    value.gsub /#{TOKEN}/, ' ' 
   end
   
   
-  # classes
+  # classes / models base
+  
   class Resource
-    # what about moving resource inside is class and make it a loadable module?? (yea like DM's)
+    
   end
   
   def to_hash
     h = {}
-    eval(self.class.name).properties.map do |prop, opts|
-      h[prop] = instance_variable_get("@#{prop}")
-    end
+    # FIXME TODO LOL: remove eval
+    
+    raise "TODO: eval has been disabled"
+    # eval(self.class.name).properties.map do |prop, opts|
+    #   # set instance variable
+    #   h[prop] = instance_variable_get "@#{prop}" 
+    # end
     h
   end
-  
 
   # UTILS
   def self.delete_db
