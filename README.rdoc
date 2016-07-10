@@ -21,7 +21,7 @@ implemented in: Milan
 #
 # antani => 
 #
-#
+# based on ruby and coffeescript, running both ruby programs with gem and npm altogether, js is transpiled trough opal, opal native "wrapper" libraries are preferred, js libraries are 150% fine too 
 #
 # ruby is purely functional
 # #
