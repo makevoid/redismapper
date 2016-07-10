@@ -156,6 +156,12 @@ class RedisMapper
     # FIXME TODO LOL: remove eval
     
     raise "TODO: eval has been disabled"
+    raise "uncomment and change redismapper.rb:165 and use classify / this solution or a similar way like Object.const_set w/ or w/o it Class.new: http://stackoverflow.com/questions/4072159/classify-a-ruby-string#4072329"
+    # this line should be:
+    #
+    # Object.const_set self.class.name.upcase.properties.map do |prop, opts| # < the line 165 should be like this
+    #
+    #
     # eval(self.class.name).properties.map do |prop, opts|
     #   # set instance variable
     #   h[prop] = instance_variable_get "@#{prop}" 
