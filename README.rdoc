@@ -8,7 +8,7 @@
     implemented in: Milan
     # new idea, call oracle  
     #
-    # degrees_c: oracle.call(temperatures) => returns (and thus you can safely display)
+    # degrees_c: oracle.call(temperatures) => returns (and thus you can safely display) # TODO: create a new repo called temperature_oracle
 
 
 
