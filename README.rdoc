@@ -2,10 +2,36 @@
 
 == a basic ORM for Redis key/value store
 
-by: Francesco 'makevoid' Canessa
+by: @makevoid
+commits time range:  Nov-Dec, 2009
+language: Ruby
+implemented in: Milan
+# new idea, call oracle  
+#
+# degrees_c: oracle.call(temperatures) => returns (and thus you can safely display)
 
 
-
+# new programming language ideas - my pseudo code
+#
+# antani: # program name
+# 
+# antani: (comments)
+#
+# antani ->
+#
+# antani => 
+#
+#
+#
+# ruby is purely functional
+# #
+# #  check out repo makevoid/faucet, which contains how to use ruby as javascript, in a more functional way basicallyy using ruby blocks (procs) with the new syntax, and require_relative used like require.js 
+# # 
+# # TODO: finish, i moved to:
+# # 
+# # makevoid/s3play_v2
+# # makevoid/uol2
+#
 
 == install dependencies
 
