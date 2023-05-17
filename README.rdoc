@@ -6,10 +6,6 @@
     commits time range:  Nov-Dec, 2009
     language: Ruby
     implemented in: Milan
-    # new idea, call oracle  
-    #
-    # degrees_c: oracle.call(temperatures) => returns (and thus you can safely display) # TODO: create a new repo called temperature_oracle
-
 
 
 == install dependencies
